@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.DatabaseMetaData;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 public class Database {
     String dbname; // database filename
@@ -49,11 +50,38 @@ public class Database {
             stmt.execute(sqlstmt);
 
             System.out.println("\"" + tableName + "\"" + " table has been created");
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
 
         }
     }
 
-  
+    // function to insert data in movies table
+    public void insertData(String tableName, String mov_title, String lead_actor, String lead_actress, int release_year,
+            String director) {
+
+        // SQL statment for inserting values
+        String sqlstmt = "INSERT INTO " + tableName
+                + " (mov_title,lead_actor,lead_actress,release_year,director) VALUES(?,?,?,?,?)";
+
+        try (Connection conn = DriverManager.getConnection(url);
+                PreparedStatement pstmt = conn.prepareStatement(sqlstmt)) {
+
+            // Setting values to insert in movies table
+            pstmt.setString(1, mov_title);
+            pstmt.setString(2, lead_actor);
+            pstmt.setString(3, lead_actress);
+            pstmt.setInt(4, release_year);
+            pstmt.setString(5, director);
+
+            //finally inserting value into movie table
+            pstmt.executeUpdate();
+
+            System.out.println("Inserted the data related to \"" + mov_title+"\"");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

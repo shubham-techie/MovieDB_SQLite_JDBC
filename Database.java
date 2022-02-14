@@ -127,7 +127,8 @@ public class Database {
 
                     System.out.println("id" + "\t" + "movie_title" + "\t" + "lead_actor" + "\t" + "lead_actress" + "\t"
                             + "release_year" + "\t" + "director");
-                    System.out.println("------------------------------------------------------------------------------------");
+                    System.out.println(
+                            "------------------------------------------------------------------------------------");
 
                     // looping through the resultSet to print each data
                     while (rs.next()) {

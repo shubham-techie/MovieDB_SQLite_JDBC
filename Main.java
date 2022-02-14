@@ -15,10 +15,10 @@ public class Main {
 
         // inserting data into movies table
         db.insertData(DB_TABLE_NAME, "The Avengers", "Steve Rogers", "Alice Eve", 2012, "Joss Whedon");
-        db.insertData(DB_TABLE_NAME, "Captain America: Civil War", "Jackson Spidell", "Jeremy Renner", 2016, "Anthony");
+        db.insertData(DB_TABLE_NAME, "Captain America", "Jackson Spidell", "Jeremy Renner", 2016, "Anthony");
         db.insertData(DB_TABLE_NAME, "Squid Game", "Lee Jung-jae", "HoYeon Jung", 2021, "Hwang Dong-hyuk");
         db.insertData(DB_TABLE_NAME, "The Lost City", "Sandra Bullock", "Patti Harrison", 2022, "Aaron Nee");
-        
+
         // Querying
         db.selectQuery(DB_TABLE_NAME);
     }

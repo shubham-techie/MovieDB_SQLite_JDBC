@@ -10,3 +10,16 @@
 5.Then, run jdbc sqlite driver using \
       &nbsp;&nbsp; &nbsp;&nbsp; 
       **cmd** : *java -classpath ".;sqlite-jdbc-3.36.0.3.jar" Main*
+      
+      
+ 
+### Output:
+##### (Note :After running the file...... "movie.db" file gets created.)
+#### File structure after compiling and connecting to SQLite DB using JDBC driver :
+![image](https://user-images.githubusercontent.com/85562020/153927123-ecce9658-4442-4b6f-a77e-f8f5bc404c2e.png)
+
+### Case 1: Querying for all parameters
+![image](https://user-images.githubusercontent.com/85562020/153927355-21a4de2e-08c4-4684-9083-47068e23bfd2.png)
+
+### Case 2: Querying only specific parameters
+![image](https://user-images.githubusercontent.com/85562020/153927982-50a7fb43-ad2c-414c-a6b6-4ac9901e513b.png)

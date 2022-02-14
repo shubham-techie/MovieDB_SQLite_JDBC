@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.DatabaseMetaData;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Scanner;
 
 public class Database {
     String dbname; // database filename
@@ -75,13 +77,71 @@ public class Database {
             pstmt.setInt(4, release_year);
             pstmt.setString(5, director);
 
-            //finally inserting value into movie table
+            // finally inserting value into movie table
             pstmt.executeUpdate();
 
-            System.out.println("Inserted the data related to \"" + mov_title+"\"");
+            System.out.println("Inserted the data related to \"" + mov_title + "\"");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    // function to execute Queries on table
+    public void selectQuery(String tableName) {
+
+        try (Scanner sc = new Scanner(System.in)) {
+
+            // getting input whether to print All query or selective
+            System.out.println("1.Print all parameters \n2.Print only movie_title,release_year,director");
+
+            System.out.print("Enter your choice : ");
+            int choice = sc.nextInt();
+
+            String sqlstmt;
+
+            switch (choice) {
+
+                // query for all parameters
+                case 1:
+                    sqlstmt = "SELECT * FROM " + tableName;
+                    break;
+
+                // query to print selective parameters
+                case 2:
+                    sqlstmt = "SELECT id,mov_title,release_year,director FROM " + tableName;
+                    break;
+
+                default:
+                    System.out.println("Error! Enter valid choice.");
+                    return;
+            }
+
+            try (Connection conn = DriverManager.getConnection(url);
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(sqlstmt)) {
+
+                // if query to print all parameters
+                if (choice == 1)
+
+                    // looping through the resultSet to print each data
+                    while (rs.next()) {
+                        System.out.println(rs.getInt("id") + "\t" + rs.getString("mov_title") + "\t"
+                                + rs.getString("lead_actor") + "\t" + rs.getString("lead_actress") + "\t"
+                                + rs.getInt("release_year") + "\t" + rs.getString("director"));
+                    }
+
+                // if query to print selective parameters
+                else if (choice == 2)
+
+                    // looping through the resultSet to print each data
+                    while (rs.next()) {
+                        System.out.println(rs.getInt("id") + "\t" + rs.getString("mov_title") + "\t"
+                                + rs.getInt("release_year") + "\t" + rs.getString("director"));
+                    }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

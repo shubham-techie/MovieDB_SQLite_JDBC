@@ -13,8 +13,11 @@ public class Main {
         // creating movies table
         db.createTable(DB_TABLE_NAME);
 
-        // inserting data into movies tabe
+        // inserting data into movies table
         db.insertData(DB_TABLE_NAME, "The Avengers", "Steve Rogers", "Alice Eve", 2012, "Joss Whedon");
         db.insertData(DB_TABLE_NAME, "Captain America: Civil War", "Jackson Spidell", "Jeremy Renner", 2016, "Anthony");
+
+        //Querying 
+        db.selectQuery(DB_TABLE_NAME);
     }
 }

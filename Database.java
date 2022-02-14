@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.DatabaseMetaData;
-
+import java.sql.Statement;
 
 public class Database {
     String dbname; // database filename
@@ -29,4 +29,31 @@ public class Database {
         }
     }
 
+    // function to create movies table
+    public void createTable(String tableName) {
+
+        // SQL statement for creating table
+        String sqlstmt = "CREATE TABLE IF NOT EXISTS " + tableName + "(\n"
+                + "id  INTEGER PRIMARY KEY NOT NULL,\n"
+                + "mov_title TEXT NOT NULL,\n"
+                + "lead_actor TEXT,\n"
+                + "lead_actress TEXT,\n"
+                + "release_year INTEGER NOT NULL,\n"
+                + "director TEXT NOT NULL\n"
+                + ");";
+
+        try (Connection conn = DriverManager.getConnection(url);
+                Statement stmt = conn.createStatement()) {
+
+            // creating table
+            stmt.execute(sqlstmt);
+
+            System.out.println("\"" + tableName + "\"" + " table has been created");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
+
+  
 }
